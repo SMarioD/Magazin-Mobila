@@ -1,0 +1,22 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<div class="product-detail-container">
+    <div class="product-detail-image">
+        <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+    </div>
+    <div class="product-detail-info">
+        <h1><%= product.title %></h1>
+        <hr>
+        <p class="product-price"><%= product.price %> RON</p>
+        <h2>Descriere</h2>
+        <p><%= product.description %></p>
+        <form action="/cart" method="POST">
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <button class="submit-btn" type="submit" style="margin-top: 2rem;">Adaugă în Coș</button>
+        </form>
+    </div>
+</div>
+
+<a href="/" class="back-link" style="display: block; margin-top: 2rem;">&larr; Înapoi la magazin</a>
+
+<%- include('../partials/footer') %>

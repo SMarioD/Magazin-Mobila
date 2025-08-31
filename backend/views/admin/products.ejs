@@ -1,0 +1,30 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<h1>Produsele Mele</h1>
+<a href="/admin/add-product" class="submit-btn">Adaugă Produs Nou</a>
+<hr>
+<% if (products.length > 0) { %>
+    <div class="product-list-admin">
+        <% products.forEach(product => { %>
+            <article class="product-item-admin">
+                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                <div class="product-info-admin">
+                    <h3><%= product.title %></h3>
+                    <p>Preț: <%= product.price %> RON</p>
+                </div>
+                <div class="product-actions-admin">
+                    <a href="/admin/edit-product/<%= product.id %>" class="action-btn edit">Editează</a>
+
+                    <form action="/admin/delete-product" method="POST" onsubmit="return confirm('Ești sigur?');">
+                        <input type="hidden" name="productId" value="<%= product.id %>">
+                        <button type="submit" class="action-btn delete">Șterge</button>
+                    </form>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p>Niciun produs găsit. Adaugă unul!</p>
+<% } %>
+
+<%- include('../partials/footer') %>

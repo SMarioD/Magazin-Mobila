@@ -1,0 +1,30 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" class="form-container">
+    <h1><% if (editing) { %>Editează Produs<% } else { %>Adaugă un Produs Nou<% } %></h1>
+    
+    <div class="form-group">
+        <label for="title">Titlu</label>
+        <input type="text" name="title" id="title" value="<%= editing ? product.title : '' %>">
+    </div>
+    <div class="form-group">
+        <label for="imageUrl">URL Imagine</label>
+        <input type="text" name="imageUrl" id="imageUrl" value="<%= editing ? product.imageUrl : '' %>">
+    </div>
+    <div class="form-group">
+        <label for="price">Preț (RON)</label>
+        <input type="number" name="price" id="price" step="0.01" value="<%= editing ? product.price : '' %>">
+    </div>
+    <div class="form-group">
+        <label for="description">Descriere</label>
+        <textarea name="description" id="description" rows="5"><%= editing ? product.description : '' %></textarea>
+    </div>
+
+    <% if (editing) { %>
+        <input type="hidden" name="productId" value="<%= product.id %>">
+    <% } %>
+    
+    <button type="submit" class="submit-btn"><% if (editing) { %>Actualizează Produs<% } else { %>Adaugă Produs<% } %></button>
+</form>
+
+<%- include('../partials/footer') %>

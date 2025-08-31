@@ -1,0 +1,25 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<h1>Comenzile Mele</h1>
+
+<% if (orders.length > 0) { %>
+    <ul class="order-list">
+        <% orders.forEach(order => { %>
+            <li class="order-item">
+                <h3>Comanda #<%= order.id %> - Plasată la <%= order.createdAt.toLocaleDateString('ro-RO') %></h3>
+                <ul>
+                    <% order.Products.forEach(product => { %>
+                        <li>
+                            <%= product.title %> (<%= product.OrderItem.quantity %> buc.)
+                            - Preț la momentul comenzii: <%= product.OrderItem.price %> RON
+                        </li>
+                    <% }); %>
+                </ul>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Nu ai plasat nicio comandă încă.</p>
+<% } %>
+
+<%- include('../partials/footer') %>

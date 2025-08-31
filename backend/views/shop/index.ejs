@@ -1,0 +1,29 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<div class="hero-section">
+    <h1>Mobilă de Calitate, Direct la Tine Acasă</h1>
+    <p>Descoperă colecțiile noastre create cu pasiune și atenție la detalii.</p>
+</div>
+
+<h2 class="section-title">Produsele Noastre</h2>
+
+<% if (products && products.length > 0) { %>
+    <div class="product-grid">
+        <% products.forEach(product => { %>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+                <div class="product-card-content">
+                    <h3><%= product.title %></h3>
+                    <p class="product-price"><%= product.price %> RON</p>
+                    <a href="/products/<%= product.id %>" class="submit-btn" style="width: auto; display: inline-block;">Vezi Detalii</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p style="text-align: center;">Momentan nu sunt produse în magazin. Reveniți în curând!</p>
+<% } %>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,34 @@
+<%- include('../partials/header', { title: pageTitle }) %>
+
+<div class="cart-container">
+    <h1>Coșul de Cumpărături</h1>
+    <% if (products.length > 0) { %>
+        <ul class="cart-list">
+            <% products.forEach(p => { %>
+                <li class="cart-item">
+                    <div class="cart-item-info">
+                        <span><strong><%= p.title %></strong></span>
+                        <span>Cantitate: <%= p.CartItem.quantity %></span>
+                        <span>Preț unitar: <%= p.price %> RON</span>
+                    </div>
+                    <form action="/cart-delete-item" method="POST">
+                        <input type="hidden" name="productId" value="<%= p.id %>">
+                        <button type="submit" class="delete-btn-cart">Șterge</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+        <hr>
+        <div class="cart-total">
+            <h3>Total: <%= totalPrice %> RON</h3>
+            <form action="/create-order" method="POST">
+                <button type="submit" class="submit-btn">Plasează Comanda</button>
+            </form>
+        </div>
+    <% } else { %>
+        <p>Coșul tău este gol.</p>
+        <a href="/" class="back-link" style="margin-top: 1rem; display: inline-block;">Continuă cumpărăturile</a>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>
